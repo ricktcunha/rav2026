@@ -1,5 +1,4 @@
 import { Sprout, Target, Users, Zap, Leaf, Lightbulb, type LucideIcon } from 'lucide-react';
-import type { ArchetypeId } from '../data/archetypes';
 
 const iconMap: Record<string, LucideIcon> = {
   Sprout,
