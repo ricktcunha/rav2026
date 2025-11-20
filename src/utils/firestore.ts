@@ -1,11 +1,13 @@
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, Firestore } from 'firebase/firestore';
 import type { Participant } from '../types/participant';
 
 // Get Firestore instance (initialized in firebase.ts)
-let db: ReturnType<typeof getFirestore> | null = null;
+let db: Firestore | null = null;
 
 export const initFirestore = (app: any) => {
-  db = getFirestore(app);
+  if (!db) {
+    db = getFirestore(app);
+  }
   return db;
 };
 

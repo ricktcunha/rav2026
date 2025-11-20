@@ -127,10 +127,9 @@ export const StatsScreen: React.FC<Props> = ({ onClose }) => {
                         className="bg-gray-800/50 rounded-xl p-4 border border-gray-700"
                       >
                         <div className="flex items-center space-x-3 mb-2">
-                          <span className="text-3xl">{archetype.icon}</span>
                           <div className="flex-1">
                             <p className="text-white font-medium text-sm">{archetype.name}</p>
-                            <p className="text-gray-400 text-xs">{count} participantes</p>
+                            <p className="text-gray-400 text-xs">{count as number} participantes</p>
                           </div>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
@@ -166,7 +165,7 @@ export const StatsScreen: React.FC<Props> = ({ onClose }) => {
                       transition={{ delay: 0.6 + index * 0.05 }}
                       className="bg-gray-800/50 rounded-xl p-4 text-center border border-gray-700"
                     >
-                      <p className="text-2xl font-bold text-agro-green">{count}</p>
+                      <p className="text-2xl font-bold text-agro-green">{count as number}</p>
                       <p className="text-white font-medium text-sm mt-1">{area}</p>
                       <p className="text-gray-400 text-xs">{areaNames[area as keyof typeof areaNames]}</p>
                     </motion.div>

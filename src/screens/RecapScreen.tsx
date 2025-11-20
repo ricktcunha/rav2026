@@ -76,10 +76,10 @@ export const RecapScreen: React.FC<Props> = ({ onComplete }) => {
             </motion.div>
 
             <h2 className="text-4xl md:text-6xl font-bold text-white">
-              2024/25
+              Cultivamos Elos
             </h2>
             <p className="text-2xl md:text-4xl text-gray-300">
-              O ano que plantamos <span className="text-agro-green font-bold">inovação</span>.
+              Em 2024/25, fortalecemos nossa <span className="text-agro-green font-bold">parceria</span>.
             </p>
 
             {/* Animated Dots */}
@@ -122,7 +122,7 @@ export const RecapScreen: React.FC<Props> = ({ onComplete }) => {
             </motion.div>
 
             <h2 className="text-5xl md:text-7xl font-bold text-white">
-              Colhemos <span className="text-yellow-400">Recordes</span>
+              Nutrimos <span className="text-yellow-400">Crescimento</span>
             </h2>
             <div className="flex justify-center items-baseline space-x-2">
               <motion.span
@@ -132,7 +132,7 @@ export const RecapScreen: React.FC<Props> = ({ onComplete }) => {
               >
                 +150%
               </motion.span>
-              <span className="text-2xl text-gray-400">em produtividade</span>
+              <span className="text-2xl text-gray-400">em resultados</span>
             </div>
 
             {/* Progress Bar */}
@@ -169,26 +169,26 @@ export const RecapScreen: React.FC<Props> = ({ onComplete }) => {
             </motion.div>
 
             <p className="text-3xl text-gray-300">
-              Mas a Adubos Real não para.
+              Agora é hora de olhar para frente.
             </p>
             <motion.h1
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
               className="text-6xl md:text-8xl font-black text-white tracking-tighter"
             >
-              2026 EXIGE{' '}
+              RAV 2026{' '}
               <motion.span
                 animate={{
                   textShadow: [
-                    "0 0 10px rgba(239, 68, 68, 0.5)",
-                    "0 0 20px rgba(239, 68, 68, 0.8)",
-                    "0 0 10px rgba(239, 68, 68, 0.5)"
+                    "0 0 10px rgba(57, 255, 20, 0.5)",
+                    "0 0 20px rgba(57, 255, 20, 0.8)",
+                    "0 0 10px rgba(57, 255, 20, 0.5)"
                   ]
                 }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="text-red-500"
+                className="text-agro-green"
               >
-                MAIS
+                FUTURO
               </motion.span>
             </motion.h1>
 
@@ -200,7 +200,7 @@ export const RecapScreen: React.FC<Props> = ({ onComplete }) => {
                   opacity: [0.5, 1, 0.5]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="w-16 h-16 border-4 border-red-500 rounded-full"
+                className="w-16 h-16 border-4 border-agro-green rounded-full"
               />
             </div>
           </motion.div>

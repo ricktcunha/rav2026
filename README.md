@@ -1,73 +1,146 @@
-# React + TypeScript + Vite
+# 🚀 RAV 2026 - Visão de Futuro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema interativo de quiz/arquétipos para o evento RAV 2026. Identifique seu perfil através de um quiz personalizado, capture sua foto e compartilhe seu resultado!
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎯 **Quiz Interativo**: Sistema de perguntas que identifica seu arquétipo profissional
+- 📸 **Captura de Fotos**: Sistema de captura via webcam com overlay futurista
+- 📱 **QR Code**: Geração automática de QR Code para compartilhamento no Instagram
+- 📊 **Estatísticas e Ranking**: Dashboard com estatísticas dos participantes
+- 🎨 **6 Arquétipos Únicos**: Pioneiro, Estrategista, Conectador, Executor, Cultivador, Visionário
+- 🔥 **Firebase Integration**: Armazenamento seguro de dados e imagens
 
-## React Compiler
+## 🛠️ Tecnologias
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **TypeScript**
+- **Vite** - Build tool ultra-rápido
+- **Tailwind CSS 4** - Estilização moderna
+- **Framer Motion** - Animações fluidas
+- **Firebase** - Backend (Firestore + Storage)
+- **QRCode** - Geração de QR Codes
+- **html2canvas** - Captura de imagens
 
-## Expanding the ESLint configuration
+## 🚀 Como Começar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Pré-requisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 18+ instalado
+- Conta no Firebase (gratuita)
+- Navegador moderno com suporte a câmera
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Instalação Rápida
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Clone o repositório**
+```bash
+git clone https://github.com/ricktcunha/rav2026.git
+cd rav2026
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Instale as dependências**
+```bash
+npm install
 ```
+
+3. **Configure o Firebase**
+   - Siga o guia completo em [`GUIA_PASSO_A_PASSO.md`](./GUIA_PASSO_A_PASSO.md)
+   - Ou veja o exemplo em [`firebase.config.example.ts`](./firebase.config.example.ts)
+
+4. **Inicie o servidor de desenvolvimento**
+```bash
+npm run dev
+```
+
+5. **Acesse no navegador**
+   - Abra `http://localhost:5173`
+   - Permita acesso à câmera quando solicitado
+
+## 📖 Guia Completo
+
+Para configuração detalhada passo a passo, consulte:
+**[GUIA_PASSO_A_PASSO.md](./GUIA_PASSO_A_PASSO.md)**
+
+Este guia inclui:
+- ✅ Configuração completa do Firebase
+- ✅ Setup do Firestore e Storage
+- ✅ Testes e troubleshooting
+- ✅ Deploy para produção
+
+## 📁 Estrutura do Projeto
+
+```
+rav2026/
+├── src/
+│   ├── components/      # Componentes reutilizáveis
+│   ├── screens/         # Telas principais do app
+│   ├── data/           # Dados (arquétipos, perguntas)
+│   ├── types/          # Tipos TypeScript
+│   └── utils/          # Utilitários (Firebase, Firestore)
+├── public/             # Arquivos estáticos
+├── dist/               # Build de produção
+└── GUIA_PASSO_A_PASSO.md  # Guia completo de setup
+```
+
+## 🎯 Fluxo do Sistema
+
+1. **Tela Inicial** → Atrai usuários com animações
+2. **Recap** → Mostra conquistas de 2024/2025
+3. **Registro** → Coleta nome e área do participante
+4. **Quiz** → 3 perguntas que definem o arquétipo
+5. **Captura** → Foto com overlay futurista
+6. **Resultado** → Revela arquétipo e gera QR Code
+7. **Estatísticas** → Dashboard com dados dos participantes
+
+## 🔧 Scripts Disponíveis
+
+```bash
+npm run dev      # Inicia servidor de desenvolvimento
+npm run build    # Cria build de produção
+npm run preview  # Preview do build de produção
+npm run lint     # Executa o linter
+```
+
+## 🔐 Configuração do Firebase
+
+⚠️ **IMPORTANTE**: Antes de usar em produção, configure:
+
+1. **Firestore Database** - Para armazenar participantes
+2. **Storage** - Para upload de imagens
+3. **Regras de Segurança** - Ajuste conforme necessário
+
+Veja detalhes completos no [GUIA_PASSO_A_PASSO.md](./GUIA_PASSO_A_PASSO.md)
+
+## 📝 Arquétipos Disponíveis
+
+- 🌱 **O Pioneiro** - Inovador e visionário
+- 🎯 **O Estrategista** - Analítico e planejador
+- 🤝 **O Conectador** - Mestre em relacionamentos
+- ⚡ **O Executor** - Alta energia e ação
+- 🌾 **O Cultivador** - Visão de longo prazo
+- 💡 **O Visionário** - Liderança inspiradora
+
+## 🐛 Troubleshooting
+
+### Câmera não funciona
+- Certifique-se de permitir acesso à câmera
+- Use HTTPS em produção (alguns navegadores bloqueiam HTTP)
+
+### Firebase não conecta
+- Verifique as credenciais em `src/utils/firebase.ts`
+- Confirme que Firestore e Storage estão ativados
+
+### QR Code não gera
+- Verifique se o upload da imagem funcionou
+- Veja o console do navegador para erros
+
+## 📄 Licença
+
+Este projeto é privado e destinado ao uso interno.
+
+## 👥 Contribuidores
+
+Desenvolvido para o evento RAV 2026.
+
+---
+
+**Precisa de ajuda?** Consulte o [GUIA_PASSO_A_PASSO.md](./GUIA_PASSO_A_PASSO.md) para instruções detalhadas!

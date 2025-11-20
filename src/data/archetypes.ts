@@ -15,7 +15,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   pioneer: {
     id: 'pioneer',
     name: 'O Pioneiro',
-    icon: '🌱',
+    icon: 'Sprout',
     description: 'Você é um inovador nato! Busca constantemente novas oportunidades e não tem medo de ser o primeiro a explorar territórios desconhecidos.',
     characteristics: [
       'Inovador e visionário',
@@ -34,7 +34,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   strategist: {
     id: 'strategist',
     name: 'O Estrategista',
-    icon: '🎯',
+    icon: 'Target',
     description: 'Você é movido por dados e planejamento! Cada decisão é calculada, cada meta é alcançável através de estratégias bem definidas.',
     characteristics: [
       'Analítico e planejador',
@@ -53,7 +53,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   connector: {
     id: 'connector',
     name: 'O Conectador',
-    icon: '🤝',
+    icon: 'Users',
     description: 'Você constrói pontes! Sua maior força está nos relacionamentos duradouros e na capacidade de criar redes poderosas de parceiros.',
     characteristics: [
       'Mestre em relacionamentos',
@@ -72,7 +72,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   executor: {
     id: 'executor',
     name: 'O Executor',
-    icon: '⚡',
+    icon: 'Zap',
     description: 'Você é pura energia e ação! Enquanto outros planejam, você já está executando e gerando resultados concretos.',
     characteristics: [
       'Alta energia e velocidade',
@@ -91,7 +91,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   cultivator: {
     id: 'cultivator',
     name: 'O Cultivador',
-    icon: '🌾',
+    icon: 'Leaf',
     description: 'Você entende que grandes colheitas vêm de cuidado constante! Sua visão de longo prazo e paciência geram crescimento sustentável.',
     characteristics: [
       'Visão de longo prazo',
@@ -110,7 +110,7 @@ export const archetypes: Record<ArchetypeId, Archetype> = {
   visionary: {
     id: 'visionary',
     name: 'O Visionário',
-    icon: '💡',
+    icon: 'Lightbulb',
     description: 'Você enxerga além do horizonte! Suas ideias transformadoras e liderança inspiradora movem pessoas e mercados.',
     characteristics: [
       'Pensa em grande escala',

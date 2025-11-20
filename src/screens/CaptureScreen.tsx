@@ -32,7 +32,12 @@ export const CaptureScreen: React.FC<Props> = ({ onCapture }) => {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }
+        video: { 
+          facingMode: 'user',
+          width: { ideal: 1920 }, // Tentar resolução alta
+          height: { ideal: 1080 },
+          aspectRatio: { ideal: 9/16 } // Tentar forçar proporção vertical se suportado
+        }
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -65,14 +70,48 @@ export const CaptureScreen: React.FC<Props> = ({ onCapture }) => {
 
   const captureImage = () => {
     if (videoRef.current) {
+      const video = videoRef.current;
       const canvas = document.createElement('canvas');
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
+      
+      // Definir resolução de saída para Full HD Stories (9:16)
+      const targetWidth = 1080;
+      const targetHeight = 1920;
+      
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      
       const ctx = canvas.getContext('2d');
       if (ctx) {
+        // Espelhar horizontalmente
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
-        ctx.drawImage(videoRef.current, 0, 0);
+        
+        // Calcular proporções para crop central (cover)
+        const videoAspect = video.videoWidth / video.videoHeight;
+        const targetAspect = targetWidth / targetHeight;
+        
+        let sourceWidth, sourceHeight, sourceX, sourceY;
+        
+        if (videoAspect > targetAspect) {
+          // Vídeo mais largo que o alvo (crop horizontal)
+          sourceHeight = video.videoHeight;
+          sourceWidth = sourceHeight * targetAspect;
+          sourceX = (video.videoWidth - sourceWidth) / 2;
+          sourceY = 0;
+        } else {
+          // Vídeo mais alto que o alvo (crop vertical)
+          sourceWidth = video.videoWidth;
+          sourceHeight = sourceWidth / targetAspect;
+          sourceX = 0;
+          sourceY = (video.videoHeight - sourceHeight) / 2;
+        }
+        
+        // Desenhar com crop para preencher 1080x1920
+        ctx.drawImage(
+          video,
+          sourceX, sourceY, sourceWidth, sourceHeight, // Source crop
+          0, 0, targetWidth, targetHeight // Destination size
+        );
 
         const imageData = canvas.toDataURL('image/jpeg', 0.9);
         setAnalyzing(true);
@@ -220,7 +259,7 @@ export const CaptureScreen: React.FC<Props> = ({ onCapture }) => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full max-w-5xl aspect-video bg-gray-900 rounded-2xl overflow-hidden border-2 border-gray-800 shadow-2xl"
+        className="relative w-full max-w-[400px] aspect-[9/16] bg-gray-900 rounded-2xl overflow-hidden border-2 border-gray-800 shadow-2xl"
       >
         <video
           ref={videoRef}

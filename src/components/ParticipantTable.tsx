@@ -42,10 +42,7 @@ export default function ParticipantTable({ participants }: ParticipantTableProps
               >
                 <td className="py-3 px-4 text-white font-medium">{participant.name}</td>
                 <td className="py-3 px-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl">{archetype.icon}</span>
-                    <span className="text-gray-300">{archetype.name}</span>
-                  </div>
+                  <span className="text-gray-300">{archetype.name}</span>
                 </td>
                 <td className="py-3 px-4">
                   <span className="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">

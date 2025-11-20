@@ -76,57 +76,42 @@ export const QuizScreen: React.FC<Props> = ({ onComplete }) => {
             {currentQ.options.map((option, index) => (
               <motion.button
                 key={index}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.1 * index }}
-                whileHover={{ scale: 1.02, x: 8 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.4 }}
+                whileHover={{ scale: 1.02, backgroundColor: 'rgba(57, 255, 20, 0.05)' }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleAnswer(option.archetype, index)}
                 disabled={selectedOption !== null}
                 className={`
-                  relative w-full p-5 md:p-6 text-left rounded-2xl
-                  border-2 transition-all duration-300 group overflow-hidden
+                  relative w-full p-6 md:p-8 text-left rounded-2xl
+                  border transition-all duration-300 group
                   ${selectedOption === index
-                    ? 'border-agro-green bg-agro-green/20 scale-105'
-                    : 'border-gray-700 hover:border-agro-green/50'
+                    ? 'border-agro-green bg-agro-green/10'
+                    : 'border-white/10 hover:border-agro-green/50 bg-white/5'
                   }
-                  ${selectedOption !== null && selectedOption !== index ? 'opacity-50' : ''}
+                  ${selectedOption !== null && selectedOption !== index ? 'opacity-40 grayscale' : ''}
                 `}
               >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-agro-green/0 via-agro-green/10 to-agro-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="relative flex items-center space-x-4">
-                  <span className={`
-                    flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full
-                    font-bold text-lg transition-all duration-300
+                <div className="flex items-center space-x-6">
+                  <div className={`
+                    flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full border
+                    font-bold text-sm transition-all duration-300
                     ${selectedOption === index
-                      ? 'bg-agro-green text-black scale-110'
-                      : 'bg-gray-800 text-agro-green group-hover:bg-agro-green/20'
+                      ? 'bg-agro-green border-agro-green text-black'
+                      : 'border-white/30 text-white/60 group-hover:border-agro-green group-hover:text-agro-green'
                     }
                   `}>
                     {String.fromCharCode(65 + index)}
-                  </span>
+                  </div>
+                  
                   <span className={`
-                    text-lg md:text-xl font-medium transition-colors duration-300
-                    ${selectedOption === index
-                      ? 'text-white'
-                      : 'text-gray-300 group-hover:text-white'
-                    }
+                    text-lg md:text-xl font-medium leading-snug transition-colors
+                    ${selectedOption === index ? 'text-white' : 'text-gray-300 group-hover:text-white'}
                   `}>
                     {option.text}
                   </span>
                 </div>
-
-                {/* Selection pulse effect */}
-                {selectedOption === index && (
-                  <motion.div
-                    className="absolute inset-0 border-2 border-agro-green rounded-2xl"
-                    initial={{ scale: 1, opacity: 1 }}
-                    animate={{ scale: 1.1, opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                  />
-                )}
               </motion.button>
             ))}
           </div>

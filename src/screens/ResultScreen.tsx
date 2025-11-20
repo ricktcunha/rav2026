@@ -34,17 +34,244 @@ export const ResultScreen: React.FC<Props> = ({ image, archetypeId, participantN
     setLoading(true);
 
     try {
-      const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: '#111',
-        scale: 2,
+      console.log("Step 1: Generating canvas from card...");
+      
+      // Criar um elemento temporário com estilos simples para evitar problemas com CSS moderno
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.width = '1080px';
+      tempDiv.style.height = '1920px'; // 9:16 Full HD
+      tempDiv.style.backgroundColor = '#111111';
+      tempDiv.style.borderRadius = '0';
+      tempDiv.style.overflow = 'hidden';
+      tempDiv.style.border = `16px solid ${archetype.color}`; // Borda mais grossa para alta resolução
+      tempDiv.style.display = 'flex';
+      tempDiv.style.flexDirection = 'column';
+      tempDiv.style.justifyContent = 'space-between';
+      tempDiv.style.padding = '80px';
+      tempDiv.style.fontFamily = 'Outfit, Inter, sans-serif';
+      
+      // Criar estrutura HTML simplificada
+      const img = document.createElement('img');
+      img.src = image;
+      img.style.position = 'absolute';
+      img.style.top = '0';
+      img.style.left = '0';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.opacity = '0.7'; // Levemente mais visível
+      tempDiv.appendChild(img);
+      
+      // Overlay gradient
+      const overlay = document.createElement('div');
+      overlay.style.position = 'absolute';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.background = 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.3) 100%)';
+      tempDiv.appendChild(overlay);
+      
+      // Conteúdo
+      const content = document.createElement('div');
+      content.style.position = 'relative';
+      content.style.zIndex = '10';
+      content.style.display = 'flex';
+      content.style.flexDirection = 'column';
+      content.style.justifyContent = 'space-between';
+      content.style.height = '100%';
+      
+      // Header
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.justifyContent = 'space-between';
+      header.style.alignItems = 'flex-start';
+      
+      const titleDiv = document.createElement('div');
+      titleDiv.style.textAlign = 'left';
+      const title = document.createElement('h3');
+      title.textContent = 'RAV 2026';
+      title.style.fontWeight = 'bold';
+      title.style.fontSize = '48px'; // Aumentado para 1080p
+      title.style.letterSpacing = '0.1em';
+      title.style.color = archetype.color;
+      title.style.margin = '0';
+      title.style.marginBottom = '12px';
+      const subtitle = document.createElement('p');
+      subtitle.textContent = 'VISÃO DE FUTURO';
+      subtitle.style.color = 'white';
+      subtitle.style.fontSize = '32px'; // Aumentado
+      subtitle.style.opacity = '0.9';
+      subtitle.style.margin = '0';
+      titleDiv.appendChild(title);
+      titleDiv.appendChild(subtitle);
+      header.appendChild(titleDiv);
+      
+      // Corner decoration
+      const corner = document.createElement('div');
+      corner.style.width = '80px';
+      corner.style.height = '80px';
+      corner.style.borderTop = '6px solid rgba(255,255,255,0.6)';
+      corner.style.borderRight = '6px solid rgba(255,255,255,0.6)';
+      corner.style.borderTopRightRadius = '24px';
+      header.appendChild(corner);
+      
+      // Footer
+      const footer = document.createElement('div');
+      footer.style.position = 'relative';
+      footer.style.zIndex = '10';
+      
+      const badge = document.createElement('div');
+      badge.style.display = 'inline-flex';
+      badge.style.alignItems = 'center';
+      badge.style.justifyContent = 'center';
+      badge.style.padding = '20px 40px';
+      badge.style.borderRadius = '9999px';
+      badge.style.backgroundColor = archetype.color;
+      badge.style.color = '#000000';
+      badge.style.fontWeight = 'bold';
+      badge.style.fontSize = '36px'; // Aumentado
+      badge.style.textTransform = 'uppercase';
+      badge.style.letterSpacing = '0.05em';
+      badge.style.marginBottom = '48px';
+      badge.style.boxShadow = `0 0 40px ${archetype.color}60`; // Glow simulado
+      
+      // Apenas o nome do arquétipo, sem emoji
+      const nameSpan = document.createElement('span');
+      nameSpan.textContent = archetype.name.toUpperCase();
+      nameSpan.style.fontSize = '36px';
+      nameSpan.style.fontWeight = 'bold';
+      badge.appendChild(nameSpan);
+      
+      const quote = document.createElement('p');
+      quote.textContent = `"${archetype.motivationalPhrase}"`;
+      quote.style.color = 'white';
+      quote.style.fontSize = '42px'; // Aumentado
+      quote.style.fontWeight = '300';
+      quote.style.lineHeight = '1.4';
+      quote.style.marginBottom = '24px';
+      quote.style.textShadow = '0 4px 8px rgba(0,0,0,0.8)';
+      
+      const name = document.createElement('p');
+      name.textContent = participantName;
+      name.style.color = '#39FF14';
+      name.style.fontWeight = 'bold';
+      name.style.fontSize = '32px';
+      name.style.marginBottom = '48px';
+      
+      const bottomBar = document.createElement('div');
+      bottomBar.style.paddingTop = '40px';
+      bottomBar.style.borderTop = '2px solid rgba(255,255,255,0.2)';
+      bottomBar.style.display = 'flex';
+      bottomBar.style.justifyContent = 'space-between';
+      bottomBar.style.alignItems = 'flex-end';
+      
+      const instagram = document.createElement('p');
+      instagram.textContent = '@adubosreal';
+      instagram.style.color = 'rgba(255,255,255,0.6)';
+      instagram.style.fontSize = '28px';
+      instagram.style.margin = '0';
+      
+      const yearDiv = document.createElement('div');
+      yearDiv.style.textAlign = 'right';
+      const prepare = document.createElement('p');
+      prepare.textContent = 'PREPARE-SE';
+      prepare.style.color = archetype.color;
+      prepare.style.fontSize = '24px';
+      prepare.style.fontWeight = 'bold';
+      prepare.style.margin = '0';
+      prepare.style.marginBottom = '8px';
+      const year = document.createElement('p');
+      year.textContent = '2026';
+      year.style.color = 'white';
+      year.style.fontWeight = 'bold';
+      year.style.fontSize = '48px';
+      year.style.margin = '0';
+      yearDiv.appendChild(prepare);
+      yearDiv.appendChild(year);
+      
+      bottomBar.appendChild(instagram);
+      bottomBar.appendChild(yearDiv);
+      
+      footer.appendChild(badge);
+      footer.appendChild(quote);
+      footer.appendChild(name);
+      footer.appendChild(bottomBar);
+      
+      content.appendChild(header);
+      content.appendChild(footer);
+      tempDiv.appendChild(content);
+      
+      document.body.appendChild(tempDiv);
+      
+      // Aguardar imagem carregar
+      await new Promise((resolve) => {
+        if (img.complete) {
+          resolve(true);
+        } else {
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(true); // Continuar mesmo se der erro
+        }
       });
+      
+      // Aguardar um pouco para garantir renderização
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      console.log("Step 2: Capturing with html2canvas...");
+      const canvas = await html2canvas(tempDiv, {
+        backgroundColor: '#111111',
+        scale: 1, // Já estamos em alta resolução
+        useCORS: true,
+        allowTaint: false,
+        logging: false,
+        ignoreElements: () => {
+          return false;
+        },
+      });
+      
+      // Remover elemento temporário
+      document.body.removeChild(tempDiv);
+      
+      console.log("Step 3: Canvas generated, converting to data URL...");
       const finalImage = canvas.toDataURL('image/jpeg', 0.9);
+      console.log("Step 4: Image data URL created, length:", finalImage.length);
+      
+      console.log("Step 5: Uploading image to Firebase Storage...");
       const downloadUrl = await uploadImage(finalImage);
-      const qr = await QRCode.toDataURL(downloadUrl);
+      console.log("Step 6: Image uploaded, URL:", downloadUrl);
+      
+      console.log("Step 7: Generating QR Code...");
+      
+      // Usar URL direta da imagem para máxima compatibilidade
+      console.log("Direct Image URL:", downloadUrl);
+      
+      const qr = await QRCode.toDataURL(downloadUrl, {
+        errorCorrectionLevel: 'M',
+        margin: 1,
+      });
+      console.log("Step 8: QR Code generated successfully");
+      
       setQrCodeUrl(qr);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error generating share:", error);
-      alert("Erro ao gerar compartilhamento. Tente novamente.");
+      console.error("Error details:", {
+        code: error?.code,
+        message: error?.message,
+        stack: error?.stack,
+      });
+      
+      let errorMessage = "Erro ao gerar compartilhamento. Tente novamente.";
+      if (error?.code === 'storage/unauthorized') {
+        errorMessage = "Erro de permissão. Verifique as regras de segurança do Storage.";
+      } else if (error?.code === 'storage/quota-exceeded') {
+        errorMessage = "Limite de armazenamento excedido.";
+      } else if (error?.message) {
+        errorMessage = `Erro: ${error.message}`;
+      }
+      
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -65,13 +292,6 @@ export const ResultScreen: React.FC<Props> = ({ image, archetypeId, participantN
             transition={{ duration: 1.5, ease: 'easeOut' }}
             className="text-center"
           >
-            <motion.div
-              className="text-9xl mb-4"
-              animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 1.5 }}
-            >
-              {archetype.icon}
-            </motion.div>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -104,7 +324,6 @@ export const ResultScreen: React.FC<Props> = ({ image, archetypeId, participantN
               </div>
               <div className="space-y-4">
                 <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-black font-bold text-sm uppercase tracking-wider" style={{ backgroundColor: archetype.color }}>
-                  <span className="text-2xl">{archetype.icon}</span>
                   <span>{archetype.name}</span>
                 </div>
                 <p className="text-white text-lg md:text-xl font-light leading-relaxed drop-shadow-md">
@@ -122,42 +341,55 @@ export const ResultScreen: React.FC<Props> = ({ image, archetypeId, participantN
             </div>
           </div>
 
-          <div className="flex flex-col items-center space-y-6 w-full max-w-md mx-auto">
+            <div className="flex flex-col items-center space-y-6 w-full max-w-md mx-auto">
             {!qrCodeUrl ? (
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleGenerateShare}
                 disabled={loading}
-                className="w-full py-6 text-black font-bold text-xl rounded-xl flex items-center justify-center space-x-3 disabled:opacity-50"
-                style={{ backgroundColor: archetype.color, boxShadow: `0 0 20px ${archetype.color}40` }}
+                className="w-full py-4 text-black font-bold text-lg rounded-full flex items-center justify-center space-x-3 disabled:opacity-50 shadow-lg transition-all"
+                style={{ backgroundColor: archetype.color }}
               >
                 {loading ? <RefreshCw className="animate-spin" /> : <><Share2 /><span>GERAR QR CODE</span></>}
               </motion.button>
             ) : (
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="bg-white p-6 rounded-xl flex flex-col items-center space-y-4 shadow-2xl">
-                <img src={qrCodeUrl} alt="QR Code" className="w-48 h-48" />
-                <div className="text-center space-y-2">
-                  <p className="text-black font-bold text-lg">Compartilhe no Instagram!</p>
-                  <p className="text-gray-700 text-sm">
-                    Escaneie o QR Code para baixar sua imagem
-                    <br />
-                    e compartilhe nos stories marcando
-                    <br />
-                    <span className="font-bold text-green-600">@adubosreal</span>
-                  </p>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                className="bg-white p-6 rounded-3xl flex flex-col items-center space-y-4 shadow-[0_0_50px_rgba(255,255,255,0.1)] w-full"
+              >
+                <div className="p-2 bg-white rounded-xl shadow-inner">
+                  <img src={qrCodeUrl} alt="QR Code" className="w-48 h-48 mix-blend-multiply" />
+                </div>
+                <div className="text-center space-y-3">
+                  <p className="text-black font-bold text-xl">Sua foto está pronta!</p>
+                  <div className="text-gray-600 text-sm space-y-2 text-left bg-gray-50 p-4 rounded-xl">
+                    <p className="flex items-center space-x-2">
+                      <span className="bg-black text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">1</span>
+                      <span>Escaneie o QR Code</span>
+                    </p>
+                    <p className="flex items-center space-x-2">
+                      <span className="bg-black text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">2</span>
+                      <span>Toque e segure na imagem</span>
+                    </p>
+                    <p className="flex items-center space-x-2">
+                      <span className="bg-black text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">3</span>
+                      <span>Compartilhe e marque <strong>@adubosreal</strong></span>
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             )}
 
-            <div className="flex flex-col space-y-3 w-full">
-              <button onClick={onShowStats} className="text-agro-green hover:text-white transition-colors flex items-center justify-center space-x-2 py-2 border border-agro-green/50 rounded-xl hover:bg-agro-green/10">
+            <div className="grid grid-cols-2 gap-3 w-full">
+              <button onClick={onShowStats} className="w-full py-3 rounded-xl border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all text-sm font-medium flex items-center justify-center space-x-2">
                 <BarChart3 size={16} />
-                <span>Ver Estatísticas</span>
+                <span>Estatísticas</span>
               </button>
-              <button onClick={onReset} className="text-gray-400 hover:text-white transition-colors flex items-center justify-center space-x-2">
+              <button onClick={onReset} className="w-full py-3 rounded-xl border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all text-sm font-medium flex items-center justify-center space-x-2">
                 <RefreshCw size={16} />
-                <span>Começar de novo</span>
+                <span>Reiniciar</span>
               </button>
             </div>
           </div>

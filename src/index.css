@@ -29,6 +29,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--color-agro-green), transparent 50%);
+  background-color: rgba(57, 255, 20, 0.5); /* #39FF14 com 50% de opacidade */
   border-radius: 9999px;
 }

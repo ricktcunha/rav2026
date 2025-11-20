@@ -77,11 +77,14 @@ export const RestingScreen: React.FC<Props> = ({ onStart, onShowStats }) => {
           transition={{ duration: 0.8 }}
           className="space-y-2"
         >
-          <div className="flex items-center justify-center space-x-2 text-agro-green">
-            <Leaf size={32} />
-            <h3 className="text-2xl font-bold tracking-wider">ADUBOS REAL</h3>
+          <div className="flex items-center justify-center">
+            <img 
+              src="/adubosreal-logo.svg" 
+              alt="Adubos Real" 
+              className="h-16 md:h-20 w-auto"
+            />
           </div>
-          <p className="text-gray-400 text-sm">Mais de 45 anos cultivando confiança</p>
+          <p className="text-gray-400 text-sm tracking-widest uppercase">Cultivamos Elos, Nutrimos Crescimento</p>
         </motion.div>
 
         {/* Year Badge */}
@@ -89,10 +92,9 @@ export const RestingScreen: React.FC<Props> = ({ onStart, onShowStats }) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-          className="inline-flex flex-col items-center px-8 py-4 bg-gradient-to-r from-agro-green/20 to-green-500/20 border-2 border-agro-green/50 rounded-2xl"
+          className="inline-flex flex-col items-center px-6 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm"
         >
-          <span className="text-5xl font-bold text-white">2024/25</span>
-          <span className="text-agro-green font-semibold text-lg mt-1">O ano que plantamos inovação</span>
+          <span className="text-agro-green font-bold text-lg tracking-widest">2024/25</span>
         </motion.div>
 
         {/* Main Title */}

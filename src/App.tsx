@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { RestingScreen } from './screens/RestingScreen';
 import { RecapScreen } from './screens/RecapScreen';
@@ -7,22 +7,34 @@ import { QuizScreen } from './screens/QuizScreen';
 import { CaptureScreen } from './screens/CaptureScreen';
 import { ResultScreen } from './screens/ResultScreen';
 import { StatsScreen } from './screens/StatsScreen';
+import { ShareScreen } from './screens/ShareScreen';
 import { AnimatePresence } from 'framer-motion';
 import type { ArchetypeId } from './data/archetypes';
 import type { Area } from './types/participant';
 import { saveParticipant } from './utils/firestore';
 
-type Screen = 'resting' | 'recap' | 'registration' | 'quiz' | 'capture' | 'result';
+type Screen = 'resting' | 'recap' | 'registration' | 'quiz' | 'capture' | 'result' | 'share';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('resting');
   const [showStats, setShowStats] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
 
   // Participant data
   const [participantName, setParticipantName] = useState('');
   const [participantArea, setParticipantArea] = useState<Area>('TXF');
   const [userArchetype, setUserArchetype] = useState<ArchetypeId>('pioneer');
   const [capturedImage, setCapturedImage] = useState<string>('');
+
+  useEffect(() => {
+    // Check for share URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const shareParam = params.get('share');
+    if (shareParam) {
+      setShareUrl(decodeURIComponent(shareParam));
+      setCurrentScreen('share');
+    }
+  }, []);
 
   const handleStart = () => {
     setCurrentScreen('recap');
@@ -100,6 +112,9 @@ function App() {
             onReset={handleReset}
             onShowStats={handleShowStats}
           />
+        )}
+        {currentScreen === 'share' && shareUrl && (
+          <ShareScreen key="share" imageUrl={shareUrl} />
         )}
       </AnimatePresence>
 
