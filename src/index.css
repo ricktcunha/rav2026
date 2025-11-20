@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-agro-green: #39FF14;
+  --color-agro-dark: #111111;
+  --color-agro-gray: #1a1a1a;
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+body {
+  background-color: var(--color-agro-dark);
+  color: white;
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-agro-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--color-agro-green), transparent 50%);
+  border-radius: 9999px;
+}
